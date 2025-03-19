@@ -171,7 +171,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/mystak23/Sentinel_Deployment/LinkedTemplates/workspace.json",
+                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/workspace.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -210,7 +210,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/mystak23/Sentinel_Deployment/LinkedTemplates/settings.json",
+                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/settings.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -242,7 +242,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/mystak23/Sentinel_Deployment/LinkedTemplates/dataConnectors.json",
+                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/dataConnectors.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -280,7 +280,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/mystak23/Sentinel_Deployment/LinkedTemplates/solutionsAndAlerts.json",
+                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/solutionsAndAlerts.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
