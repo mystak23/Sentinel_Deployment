@@ -179,7 +179,7 @@
                           "allowedValues": [
                               {
                                   "label": "Microsoft Entra ID",
-                                  "value": "MicrosoftEntraID"
+                                  "value": "AzureActiveDirectory" 
                               },
                               {
                                   "label": "Active Directory (requires Microsoft Defender for Identity)",
