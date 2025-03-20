@@ -1,3 +1,7 @@
+# Author
+
+Matěj Hrabálek -- https://www.linkedin.com/in/matejhrabalek/
+
 # 📌 Sentinel Deployment
 
 This repository contains scripts and configurations for automating the deployment and configuration of **Microsoft Sentinel**.
