@@ -59,7 +59,7 @@
     },
     "resources": [
         {
-            "condition": "[and(contains(parameters('dataConnectorsKind'), 'AzureActiveDirectory'),parameters('enableMicrosoftAlerts'))]",
+            "condition": "[and(contains(parameters('dataConnectorsKind'), 'MicrosoftEntraID'),parameters('enableMicrosoftAlerts'))]",
             "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
             "name": "[concat(parameters('workspaceName'),'/Microsoft.SecurityInsights/',variables('aadipRuleId'))]",
             "apiVersion": "2020-01-01",
