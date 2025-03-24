@@ -11,20 +11,6 @@
                 "description": "The list of Content Hub solutions to deploy."
             }
         },
-        "enableSolutionsEssentials": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub Essentials solutions to deploy."
-            },
-            "defaultValue": []
-        },
-        "enableSolutionsTraining": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub Training solutions to deploy."
-            },
-            "defaultValue": []
-        },
         "location": {
             "type": "string"
         }
@@ -69,7 +55,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-office365-66e732d2-f8b7-4c08-8d12-aa8c143acbdd-azure-sentinel-solution-office365/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20365/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -102,7 +88,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-microsoftdefenderforcloud-7f61aa4d-8e77-42b6-93f7-e78561b05e98-azure-sentinel-solution-microsoftdefenderforcloud/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20Defender%20for%20Cloud/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -126,7 +112,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-azureactivity-c9097f86-9937-4d19-9849-736db696b675-azure-sentinel-solution-azureactivity/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Azure%20Activity/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {

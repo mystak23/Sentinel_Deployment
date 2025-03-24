@@ -233,58 +233,24 @@
                               {
                                   "label": "Microsoft Entra ID",
                                   "description": "The Microsoft Entra ID solution for Microsoft Sentinel enables you to ingest Microsoft Entra ID Audit,Sign-in,Provisioning,Risk Events and Risky User/Service Principal logs using Diagnostic Settings into Microsoft Sentinel.",
-                                  "value": "Microsoft Entra ID"
+                                  "value": "MicrosoftEntraID"
                               },
                               {
                                   "label": "Azure Activity",
                                   "description": "The Azure Activity solution for Microsoft Sentinel enables you to ingest Azure Activity Administrative, Security, Service Health, Alert, Recommendation, Policy, Autoscale and Resource Health logs using Diagnostic Settings into Microsoft Sentinel.",
-                                  "value": "Azure Activity"
+                                  "value": "AzureActivity"
                               },
                               {
                                   "label": "Microsoft 365",
                                   "description": "The Microsoft 365 solution for Microsoft Sentinel enables you to ingest operational logs from Microsoft 365 to gain insights into user and admin activity across your collaboration platforms such as Teams, SharePoint and Exchange.",
-                                  "value": "Microsoft 365"
+                                  "value": "Microsoft365"
                               },
                               {
                                   "label": "Microsoft Defender for Cloud",
                                   "description": "The Microsoft Defender for Cloud solution for Microsoft Sentinel allows you to ingest Security alerts reported in Microsoft Defender for Cloud on assessing your hybrid cloud workload's security posture.",
-                                  "value": "Microsoft Defender for Cloud"
+                                  "value": "MicrosoftDefenderForCloud"
                               }
                           ],
-                          "required": false
-                      },
-                      "visible": true
-                  },
-                  {
-                    "name": "enableSolutionsEssentials",
-                      "type": "Microsoft.Common.DropDown",
-                      "label": "Select Essentials Content Hub solutions to install",
-                      "placeholder": "",
-                      "multiselect": true,
-                      "filter": true,
-                      "filterPlaceholder": "Filter items ...",
-                      "multiLine": true,
-                      "defaultDescription": "A value for selection",
-                      "toolTip": "Select essentials solutions that you would like to install",
-                      "constraints": {
-                          "allowedValues": [],
-                          "required": false
-                      },
-                      "visible": true
-                  },
-                  {
-                    "name": "enableSolutionsTraining",
-                      "type": "Microsoft.Common.DropDown",
-                      "label": "Select Training and Tutorials Content Hub solutions to install",
-                      "placeholder": "",
-                      "multiselect": true,
-                      "filter": true,
-                      "filterPlaceholder": "Filter items ...",
-                      "multiLine": true,
-                      "defaultDescription": "A value for selection",
-                      "toolTip": "Select the training and tutorials solutions that you would like to install",
-                      "constraints": {
-                          "allowedValues": [],
                           "required": false
                       },
                       "visible": true
@@ -354,7 +320,7 @@
                       "constraints": {
                           "allowedValues": [
                               {
-                                  "label": "Signin Logs",
+                                  "label": "Sign in Logs",
                                   "value": "SigninLogs"
                               },
                               {
@@ -363,11 +329,11 @@
                               },
                               {
                                   "label": "AAD Non-Interactive User Sign-In Logs",
-                                  "value": "AAD NonInteractiveUserSignInLogs"
+                                  "value": "AADNonInteractiveUserSignInLogs"
                               },
                               {
                                   "label": "AAD Service Principal Sign-In Logs",
-                                  "value": "AAD ServicePrincipalSignInLogs"
+                                  "value": "AADServicePrincipalSignInLogs"
                               },
                               {
                                   "label": "AAD Managed Identity Sign-In Logs",
@@ -407,75 +373,6 @@
                       "visible": "[if(contains(steps('dataConnectors').enableDataConnectors,'MicrosoftEntraID'),true,false)]"
                   }
               ]
-          },
-          {
-              "name": "analyticsRules",
-              "label": "Analytics Rules",
-              "elements": [
-                  {
-                      "name": "infoBoxRules",
-                      "type": "Microsoft.Common.InfoBox",
-                      "visible": true,
-                      "options": {
-                          "icon": "Info",
-                          "text": "Please select which analytics rules you would like to enable in your Microsoft Sentinel environment",
-                          "uri": "https://learn.microsoft.com/azure/sentinel/detect-threats-built-in"
-                      }
-                  },
-                  {
-                      "name": "enableMLAlerts",
-                      "type": "Microsoft.Common.CheckBox",
-                      "label": "Enable ML Behavior Analytics alert rules?",
-                      "toolTip": "Select to enable ML Behavior Analytics rules for selected connectors (SecurityEvents and/or Syslog)",
-                      "constraints": {
-                          "required": false,
-                          "validationMessage": "Enables SSH and/or RDP anomalous login alerts"
-                      },
-                      "visible": "[if(or(contains(steps('dataConnectors').enableDataConnectors,'Syslog'),contains(steps('dataConnectors').enableDataConnectors,'SecurityEvents')), true, false)]"
-                  },
-                  {
-                      "name": "enableScheduledAlerts",
-                      "type": "Microsoft.Common.CheckBox",
-                      "label": "Enable Scheduled alert rules for selected Content Hub solutions and Data Connectors?",
-                      "toolTip": "Select to enable Scheduled and NRT analytics rules for the solutions and connectors selected in the previous tabs",
-                      "constraints": {
-                          "required": false,
-                          "validationMessage": "Enables Scheduled and NRT rules matching any of the selected solutions and connectors"
-                      },
-                      "visible": true
-                  },
-                  {
-                      "name": "severityLevels",
-                      "type": "Microsoft.Common.DropDown",
-                      "label": "Select the severity of the rules to enable",
-                      "placeholder": "",
-                      "multiselect": true,
-                      "defaultValue": [{"value": "High"}, {"value": "Medium"}],
-                      "toolTip": "Select the data connectors that you would like to enable",
-                      "constraints": {
-                          "allowedValues": [
-                              {
-                                  "label": "High",
-                                  "value": "High"
-                              },
-                              {
-                                  "label": "Medium",
-                                  "value": "Medium"
-                              },
-                              {
-                                  "label": "Low",
-                                  "value": "Low"
-                              },
-                              {
-                                  "label": "Informational",
-                                  "value": "informational"
-                              }
-                          ],
-                          "required": false
-                      },
-                      "visible": "[if(steps('analyticsRules').enableScheduledAlerts, true, false)]"
-                  }
-              ]
           }
         ],
         "outputs": {
@@ -488,14 +385,9 @@
             "identityProviders": "[steps('settings').identityProviders]",
             "enableDiagnostics": "[steps('settings').enableDiagnostics]",
             "enableSolutions1P": "[steps('solutions').enableSolutions1P]",
-            "enableSolutionsEssentials": "[steps('solutions').enableSolutionsEssentials]",
-            "enableSolutionsTraining": "[steps('solutions').enableSolutionsTraining]",
             "enableDataConnectors": "[steps('dataConnectors').enableDataConnectors]",
             "aadStreams": "[steps('dataConnectors').aadStreams]",
             "location": "[location()]",
-            "enableMLAlerts": "[steps('analyticsRules').enableMLAlerts]",
-            "enableScheduledAlerts": "[steps('analyticsRules').enableScheduledAlerts]",
-            "severityLevels": "[steps('analyticsRules').severityLevels]",
             "rgName": "[basics('rgName')]"
         }
     }
