@@ -113,7 +113,12 @@
             "metadata": {
                 "description": "Severity levels desired for Analytics Rules"
             },
-            "defaultValue": []
+            "defaultValue": [
+                "Informational",
+                "Low",
+                "Medium",
+                "High"
+            ]
         },
         "_artifactsLocation": {
             "type": "string",
