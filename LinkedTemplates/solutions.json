@@ -18,14 +18,14 @@
     "variables": {},
     "resources": [
         {
-            "condition": "[contains(parameters('enableSolutions1P'), 'Entra')]",
+            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftEntraID')]",
             "name": "MicrosoftEntraID",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-azureactivedirectory-4ce15e62-2d69-4e80-ab66-9acb9ca86a07-azure-sentinel-solution-azureactivedirectory/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20Entra%20ID/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -37,12 +37,6 @@
                     },
                     "workspace-location": {
                         "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "Azure AD Audit logs"
-                    },
-                    "workbook2-name": {
-                        "value": "Azure AD Sign-in logs"
                     }
                 }
             }
@@ -55,7 +49,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-office365-66e732d2-f8b7-4c08-8d12-aa8c143acbdd-azure-sentinel-solution-office365/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20365/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -88,7 +82,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/sentinel4teams.sentinelforteams-f4df5439-7b5b-439c-9a5d-e734aa1d26c5-sentinelforteamssolution/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Teams/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -100,22 +94,19 @@
                     },
                     "workspace-location": {
                         "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "Microsoft Teams"
                     }
                 }
             }
         },
         {
-            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderForEndpoint')]",
+            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderforEndpoint')]",
             "name": "MicrosoftDefenderForEndpoint",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-microsoftdefenderendpoint-b9a486d7-c89d-416c-85d6-af952bfd363c-microsoftdefenderendpoint/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/MicrosoftDefenderForEndpoint/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -127,22 +118,19 @@
                     },
                     "workspace-location": {
                         "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "Microsoft Defender For EndPoint"
                     }
                 }
             }
         },
         {
-            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderForCloud')]",
+            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderforCloud')]",
             "name": "MicrosoftDefenderForCloud",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-microsoftdefenderforcloud-7f61aa4d-8e77-42b6-93f7-e78561b05e98-azure-sentinel-solution-microsoftdefenderforcloud/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20Defender%20for%20Cloud/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -166,7 +154,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-azureactivity-c9097f86-9937-4d19-9849-736db696b675-azure-sentinel-solution-azureactivity/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Azure%20Activity/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -178,9 +166,6 @@
                     },
                     "workspace-location": {
                         "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "Azure Activity"
                     }
                 }
             }
@@ -193,7 +178,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://catalogartifact.azureedge.net/publicartifacts/azuresentinel.azure-sentinel-solution-threatintelligence-taxii-b8b68abb-67fc-41d5-a93f-2d0699419943-azure-sentinel-solution-threatintelligence-taxii/Artifacts/mainTemplate.json",
+                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Threat%20Intelligence/Package/mainTemplate.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -205,9 +190,6 @@
                     },
                     "workspace-location": {
                         "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "Threat Intelligence"
                     }
                 }
             }
