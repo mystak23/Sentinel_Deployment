@@ -77,6 +77,13 @@
             },
             "defaultValue": true
         },
+        "enableSolutions1P": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of Content Hub 1st party solutions to deploy."
+            },
+            "defaultValue": []
+        },
         "aadStreams": {
             "type": "array",
             "metadata": {
