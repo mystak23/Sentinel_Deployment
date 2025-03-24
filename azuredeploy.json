@@ -77,13 +77,6 @@
             },
             "defaultValue": true
         },
-        "enableSolutions1P": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub 1st party solutions to deploy."
-            },
-            "defaultValue": []
-        },
         "aadStreams": {
             "type": "array",
             "metadata": {
@@ -201,9 +194,7 @@
             "apiVersion": "2020-06-01",
             "resourceGroup": "[parameters('rgName')]",
             "dependsOn": [
-                "workspaceCreation",
-                "enableSolutionsAndAlerts"
-            ],
+                "workspaceCreation"            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
