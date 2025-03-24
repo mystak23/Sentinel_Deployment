@@ -283,27 +283,67 @@
                       "defaultDescription": "A value for selection",
                       "toolTip": "Select the data connectors that you would like to enable",
                       "constraints": {
-                          "allowedValues": [
-                            {
-                                "label": "Microsoft Entra ID",
-                                "description": "Relevant license and Global Admin or Security Admin permission required.",
-                                "value": "MicrosoftEntraID"
-                            },  
-                            {
-                                "label": "Azure Activity",
-                                "description": "This will only bring logs from the subscription selected in Basics tab. Relevant permissions at the subscription level are required.",
-                                "value": "AzureActivity"
-                            },
-                            {
-                                "label": "Microsoft Defender for Cloud",
-                                "description": "Security Reader permission required",
-                                "value": "MicrosoftDefenderForCloud"
-                            },
-                            {
-                                "label": "Microsoft 365",
-                                "description": "Relevant license and Global Admin or Security Admin permission required",
-                                "value": "Microsoft365"
-                            }
+"allowedValues": [
+                              {
+                                  "label": "Azure Active Directory",
+                                  "description": "The Azure Active Directory solution for Microsoft Sentinel enables you to ingest Azure Active Directory Audit,Sign-in,Provisioning,Risk Events and Risky User/Service Principal logs using Diagnostic Settings into Microsoft Sentinel.",
+                                  "value": "Azure Active Directory"
+                              },
+                              {
+                                  "label": "Azure Activity",
+                                  "description": "The Azure Activity solution for Microsoft Sentinel enables you to ingest Azure Activity Administrative, Security, Service Health, Alert, Recommendation, Policy, Autoscale and Resource Health logs using Diagnostic Settings into Microsoft Sentinel.",
+                                  "value": "Azure Activity"
+                              },
+                              {
+                                  "label": "Dynamics 365 CE",
+                                  "description": "The Microsoft Sentinel solution for Dynamics 365 CE apps provides threat monitoring, detection and incident response capabilities for Dynamics 365 CE apps.",
+                                  "value": "Dynamics 365 CE Apps"
+                              },
+                              {
+                                  "label": "Microsoft 365",
+                                  "description": "The Microsoft 365 solution for Microsoft Sentinel enables you to ingest operational logs from Microsoft 365 to gain insights into user and admin activity across your collaboration platforms such as Teams, SharePoint and Exchange.",
+                                  "value": "Microsoft 365"
+                              },
+                              {
+                                  "label": "Microsoft Defender for Cloud",
+                                  "description": "The Microsoft Defender for Cloud solution for Microsoft Sentinel allows you to ingest Security alerts reported in Microsoft Defender for Cloud on assessing your hybrid cloud workload's security posture.",
+                                  "value": "Microsoft Defender for Cloud"
+                              },
+                              {
+                                  "label": "Microsoft Defender for Endpoint",
+                                  "description": "Microsoft Defender for Endpoint is an enterprise endpoint security platform designed to help enterprise networks prevent, detect, investigate, and respond to advanced threats.",
+                                  "value": "Microsoft Defender for Endpoint"
+                              },
+                              {
+                                  "label": "Microsoft Defender for IoT",
+                                  "description": "The Microsoft Defender for IoT solution for Microsoft Sentinel allows you to ingest Security alerts reported in Microsoft Defender for IoT on assessing your Internet of Things (IoT)/Operational Technology (OT) infrastructure.",
+                                  "value": "Microsoft Defender for IoT"
+                              },
+                              {
+                                  "label": "Microsoft Insider Risk Management",
+                                  "description": "This solution enables insider risk management teams to investigate risk-based behavior across 25+ Microsoft products. This solution is a better-together story between Microsoft Sentinel and Microsoft Purview Insider Risk Management.",
+                                  "value": "Microsoft Purview Insider Risk Management"
+                              },
+                              {
+                                  "label": "Microsoft PowerBI",
+                                  "description": "The Microsoft PowerBI solution enables you to track user activities in your PowerBI environment.",
+                                  "value": "Microsoft PowerBI"
+                              },
+                              {
+                                  "label": "Microsoft Project",
+                                  "description": "Stream your Microsoft Project audit logs into Microsoft Sentinel in order to track your project activities.",
+                                  "value": "Microsoft Project"
+                              },
+                              {
+                                  "label": "Microsoft Teams",
+                                  "description": "Microsoft Sentinel for Teams provides Teams security logs visibility and threat protection.",
+                                  "value": "Teams"
+                              },
+                              {
+                                  "label": "Threat Intelligence",
+                                  "description": "Ingest threat indicators into Microsoft Sentinel. Threat indicators can be IP addresses, domains, URLs and file hashes and can be used to correlate across log sources for known indicators of compromise and/or indicators of active attack",
+                                  "value": "Threat Intelligence"
+                              }
                           ],
                           "required": true
                       },
