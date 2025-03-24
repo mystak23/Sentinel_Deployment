@@ -108,6 +108,13 @@
         "enableDiagnostics": {
             "type": "bool"
         },
+        "severityLevels": {
+            "type": "array",
+            "metadata": {
+                "description": "Severity levels desired for Analytics Rules"
+            },
+            "defaultValue": []
+        },
         "_artifactsLocation": {
             "type": "string",
             "metadata": {
