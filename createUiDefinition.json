@@ -321,27 +321,27 @@
                           "allowedValues": [
                               {
                                   "label": "Sign in Logs",
-                                  "value": "SigninLogs"
+                                  "value": "SignInLogs"
                               },
                               {
                                   "label": "Audit Logs",
                                   "value": "AuditLogs"
                               },
                               {
-                                  "label": "AAD Non-Interactive User Sign-In Logs",
-                                  "value": "AADNonInteractiveUserSignInLogs"
+                                  "label": "Non-Interactive User Sign-In Logs",
+                                  "value": "NonInteractiveUserSignInLogs"
                               },
                               {
-                                  "label": "AAD Service Principal Sign-In Logs",
-                                  "value": "AADServicePrincipalSignInLogs"
+                                  "label": "Service Principal Sign-In Logs",
+                                  "value": "ServicePrincipalSignInLogs"
                               },
                               {
-                                  "label": "AAD Managed Identity Sign-In Logs",
-                                  "value": "AADManagedIdentitySignInLogs"
+                                  "label": "Managed Identity Sign-In Logs",
+                                  "value": "ManagedIdentitySignInLogs"
                               },
                               {
-                                  "label": "AAD Provisioning Logs",
-                                  "value": "AADProvisioningLogs"
+                                  "label": "Provisioning Logs",
+                                  "value": "ProvisioningLogs"
                               },
                               {
                                   "label": "ADFS Sign-In Logs",
@@ -349,11 +349,11 @@
                               },
                               {
                                   "label": "AAD User Risk Events",
-                                  "value": "AADUserRiskEvents"
+                                  "value": "UserRiskEvents"
                               },
                               {
                                   "label": "AAD Risky Users",
-                                  "value": "AADRiskyUsers"
+                                  "value": "RiskyUsers"
                               },
                               {
                                   "label": "Network Access Traffic Logs",
@@ -361,11 +361,11 @@
                               },
                               {
                                   "label": "AAD Risky Service Principals",
-                                  "value": "AADRiskyServicePrincipals"
+                                  "value": "RiskyServicePrincipals"
                               },
                               {
                                   "label": "Service Principal Risk Events",
-                                  "value": "AADServicePrincipalRiskEvents"
+                                  "value": "ServicePrincipalRiskEvents"
                               }
                           ],
                           "required": false
