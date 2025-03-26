@@ -128,10 +128,16 @@
             "defaultValue": "https://raw.githubusercontent.com/garybushey/AllInOneGov/main"
         },
         "identityResourceGroup": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Name of the resource group containing the user-assigned managed identity."
+            }
         },
         "identityName": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Name of the user-assigned managed identity used for deployment scripts."
+            }
         }
     },
     "variables": {},
