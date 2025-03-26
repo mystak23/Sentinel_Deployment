@@ -126,6 +126,12 @@
                 "description": "The location of resources"
             },
             "defaultValue": "https://raw.githubusercontent.com/garybushey/AllInOneGov/main"
+        },
+        "identityResourceGroup": {
+            "type": "string"
+        },
+        "identityName": {
+            "type": "string"
         }
     },
     "variables": {},
@@ -172,6 +178,42 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
+            "name": "runDiagnosticsScriptDeployment",
+            "resourceGroup": "[parameters('rgName')]",
+            "dependsOn": [
+                "workspaceCreation"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/diagnosticSettings.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "rgName": {
+                        "value": "[parameters('rgName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "workspaceName": {
+                        "value": "[parameters('workspaceName')]"
+                    },
+                    "subscriptionId": {
+                        "value": "[subscription().subscriptionId]"
+                    },
+                    "identityResourceGroup": {
+                        "value": "[parameters('identityResourceGroup')]"
+                    },
+                    "identityName": {
+                        "value": "[parameters('identityName')]"
                     }
                 }
             }
