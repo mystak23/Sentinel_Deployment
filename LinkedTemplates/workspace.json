@@ -142,6 +142,22 @@
                 "title": "placeholder incident",
                 "classification": "Undetermined"
             }
+        },
+        {
+            "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
+            "apiVersion": "2021-05-01-preview",
+            "name": "[concat(parameters('workspaceName'), '/Microsoft.Insights/LAWorkspaceDiagnostics')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
+            ],
+            "properties": {
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                "logCategoryGroups": [
+                    "audit",
+                    "allLogs"
+                ],
+                "metrics": []
+            }
         }
     ],
     "outputs": {}
