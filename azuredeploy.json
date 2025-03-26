@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "rgName": {
@@ -131,19 +131,10 @@
     "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Resources/resourceGroups",
-            "apiVersion": "2020-06-01",
-            "name": "[parameters('rgName')]",
-            "location": "[parameters('location')]",
-            "properties": {}
-        },
-        {
             "name": "workspaceCreation",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
-            "dependsOn": [
-                "[resourceId('Microsoft.Resources/resourceGroups',parameters('rgName'))]"
-            ],
+            "dependsOn": [],
             "resourceGroup": "[parameters('rgName')]",
             "properties": {
                 "mode": "Incremental",
@@ -317,21 +308,45 @@
                             "properties": {
                                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                                 "logs": [
-                                    { "category": "Administrative", "enabled": true },
-                                    { "category": "Security", "enabled": true },
-                                    { "category": "ServiceHealth", "enabled": true },
-                                    { "category": "Alert", "enabled": true },
-                                    { "category": "Recommendation", "enabled": true },
-                                    { "category": "Policy", "enabled": true },
-                                    { "category": "Autoscale", "enabled": true },
-                                    { "category": "ResourceHealth", "enabled": true }
+                                    {
+                                        "category": "Administrative",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Security",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "ServiceHealth",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Alert",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Recommendation",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Policy",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Autoscale",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "ResourceHealth",
+                                        "enabled": true
+                                    }
                                 ]
                             }
                         }
                     ]
                 }
             }
-        },
+        }
     ],
     "outputs": {
         "workspaceName": {
