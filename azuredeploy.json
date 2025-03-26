@@ -274,33 +274,6 @@
                     }
                 }
             }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-06-01",
-            "name": "runDiagnosticsScriptDeployment",
-            "resourceGroup": "[parameters('rgName')]",
-            "dependsOn": [
-                "workspaceCreation"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/diagnosticScript.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "rgName": {
-                        "value": "[parameters('rgName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspaceName": {
-                        "value": "[parameters('workspaceName')]"
-                    }
-                }
-            }
         }
     ],
     "outputs": {

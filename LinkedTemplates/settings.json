@@ -18,7 +18,7 @@
         "identityProviders": {
             "type": "array",
             "metadata": {
-                "description": "Array of identity providers to be synched with UEBA. Valid identity providers are 'ActiveDirectory' and 'AzureActiveDirectory'"
+                "description": "Array of identity providers to be synched with UEBA. Valid identity providers are 'ActiveDirectory' and 'MicrosoftEntraID'"
             }
         },
         "enableDiagnostics": {
@@ -50,14 +50,14 @@
             "apiVersion": "2015-11-01-preview",
             "name": "[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
             "location": "[resourceGroup().location]",
-            "properties": {
-                "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
+            "properties":{
+                "workspaceResourceId":"[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"    
             },
-            "plan": {
-                "name": "[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
-                "publisher": "Microsoft",
-                "product": "OMSGallery/BehaviorAnalyticsInsights",
-                "promotionCode": ""
+            "plan":{
+                "name":"[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
+                "publisher":"Microsoft",
+                "product":"OMSGallery/BehaviorAnalyticsInsights",
+                "promotionCode":""
             }
         },
         {
@@ -69,81 +69,18 @@
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "logs": [
                     {
+                        "category": "Automation",
+                        "enabled": true
+                    },
+                    {
+                        "category": "DataConnectors",
+                        "enabled": true
+                    },
+                    {
                         "category": "Analytics",
                         "enabled": true
                     }
                 ]
-            }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "name": "subscriptionDiagnosticsDeployment",
-            "properties": {
-                "mode": "Incremental",
-                "expressionEvaluationOptions": {
-                    "scope": "inner"
-                },
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {
-                        "workspaceName": {
-                            "type": "string"
-                        }
-                    },
-                    "resources": [
-                        {
-                            "type": "Microsoft.Insights/diagnosticSettings",
-                            "apiVersion": "2021-05-01-preview",
-                            "name": "SubscriptionDiagnostics",
-                            "scope": "[subscription().id]",
-                            "properties": {
-                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                                "logs": [
-                                    {
-                                        "category": "Administrative",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Security",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "ServiceHealth",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Alert",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Recommendation",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Policy",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Autoscale",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "ResourceHealth",
-                                        "enabled": true
-                                    }
-                                ],
-                                "metrics": []
-                            }
-                        }
-                    ]
-                },
-                "parameters": {
-                    "workspaceName": {
-                        "value": "[parameters('workspaceName')]"
-                    }
-                }
             }
         }
     ],
