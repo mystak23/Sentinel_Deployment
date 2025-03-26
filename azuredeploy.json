@@ -274,6 +274,40 @@
                     }
                 }
             }
+        },
+        {
+            "type": "Microsoft.Resources/deploymentScripts",
+            "apiVersion": "2020-10-01",
+            "name": "runDiagnosticSettingsScript",
+            "location": "[parameters('location')]",
+            "kind": "AzureCLI",
+            "dependsOn": [
+                "workspaceCreation"
+            ],
+            "properties": {
+                "forceUpdateTag": "diagnostics-v1",
+                "azCliVersion": "2.52.0",
+                "timeout": "PT30M",
+                "cleanupPreference": "OnSuccess",
+                "retentionInterval": "P1D",
+                "environmentVariables": [
+                    {
+                        "name": "RG_NAME",
+                        "value": "[parameters('rgName')]"
+                    },
+                    {
+                        "name": "WORKSPACE_NAME",
+                        "value": "[parameters('workspaceName')]"
+                    }
+                ],
+                "scriptContent": "az config set extension.use_dynamic_install=yes_without_prompt\n\nWS_ID=$(az monitor log-analytics workspace show --workspace-name $WORKSPACE_NAME --resource-group $RG_NAME --query id -o tsv)\n\naz monitor diagnostic-settings create --name LAWorkspaceDiagnostics --resource $WS_ID --workspace $WS_ID --logs '[{\"categoryGroup\": \"audit\", \"enabled\": true}, {\"categoryGroup\": \"allLogs\", \"enabled\": true}]' --metrics '[]'\n\naz monitor diagnostic-settings subscription create --name SubscriptionDiagnostics --workspace $WS_ID --logs '[{\"category\": \"Administrative\", \"enabled\": true}, {\"category\": \"Security\", \"enabled\": true}, {\"category\": \"ServiceHealth\", \"enabled\": true}, {\"category\": \"Alert\", \"enabled\": true}, {\"category\": \"Recommendation\", \"enabled\": true}, {\"category\": \"Policy\", \"enabled\": true}, {\"category\": \"Autoscale\", \"enabled\": true}, {\"category\": \"ResourceHealth\", \"enabled\": true}]'",
+                "identity": {
+                    "type": "UserAssigned",
+                    "userAssignedIdentities": {
+                        "/subscriptions/YOUR_SUBSCRIPTION_ID/resourcegroups/YOUR_RESOURCE_GROUP/providers/Microsoft.ManagedIdentity/userAssignedIdentities/YOUR_IDENTITY_NAME": {}
+                    }
+                }
+            }
         }
     ],
     "outputs": {
