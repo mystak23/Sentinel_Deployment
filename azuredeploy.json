@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "rgName": {
@@ -130,6 +130,13 @@
     },
     "variables": {},
     "resources": [
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('rgName')]",
+            "location": "[parameters('location')]",
+            "properties": {}
+        },
         {
             "name": "workspaceCreation",
             "type": "Microsoft.Resources/deployments",
@@ -267,88 +274,7 @@
                     }
                 }
             }
-        },
-        {
-            "name": "diagnosticSettings",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-06-01",
-            "resourceGroup": "[parameters('rgName')]",
-            "dependsOn": [
-                "workspaceCreation"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "resources": [
-                        {
-                            "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
-                            "apiVersion": "2021-05-01-preview",
-                            "name": "[format('{0}/Microsoft.Insights/LAWorkspaceDiagnostics', parameters('workspaceName'))]",
-                            "dependsOn": [],
-                            "properties": {
-                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                                "logs": [
-                                    {
-                                        "categoryGroup": "audit",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "categoryGroup": "allLogs",
-                                        "enabled": true
-                                    }
-                                ],
-                                "metrics": []
-                            }
-                        },
-                        {
-                            "type": "Microsoft.Insights/diagnosticSettings",
-                            "apiVersion": "2021-05-01-preview",
-                            "name": "SubscriptionDiagnostics",
-                            "scope": "[subscription().id]",
-                            "properties": {
-                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                                "logs": [
-                                    {
-                                        "category": "Administrative",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Security",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "ServiceHealth",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Alert",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Recommendation",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Policy",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "Autoscale",
-                                        "enabled": true
-                                    },
-                                    {
-                                        "category": "ResourceHealth",
-                                        "enabled": true
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        },
+        }
     ],
     "outputs": {
         "workspaceName": {
