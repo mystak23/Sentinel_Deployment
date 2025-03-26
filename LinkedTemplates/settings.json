@@ -93,7 +93,6 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
             "name": "subscriptionDiagnosticsDeployment",
-            "location": "[resourceGroup().location]",
             "properties": {
                 "mode": "Incremental",
                 "expressionEvaluationOptions": {
