@@ -82,6 +82,26 @@
                     }
                 ]
             }
+        },
+        {
+            "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
+            "apiVersion": "2021-05-01-preview",
+            "name": "[concat(parameters('workspaceName'), '/Microsoft.Insights/LAWorkspaceDiagnostics')]",
+            "dependsOn": [],
+            "properties": {
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                "logs": [
+                    {
+                        "category": "AuditLogs",
+                        "enabled": true
+                    },
+                    {
+                        "category": "AllLogs",
+                        "enabled": true
+                    }
+                ],
+                "metrics": []
+            }
         }
     ],
     "outputs": {}
