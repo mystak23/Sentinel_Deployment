@@ -175,13 +175,13 @@
         {
             "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2021-05-01-preview",
-            "name": "send-to-workspace-subscription",
-            "scope": "[subscription().id]",
+            "name": "send-activitylogs-to-workspace",
+            "scope": "/providers/microsoft.insights/eventtypes/management",
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "logs": [
                     {
-                        "category": "AuditEvent",
+                        "category": "Administrative",
                         "enabled": true,
                         "retentionPolicy": {
                             "enabled": false,
@@ -189,7 +189,39 @@
                         }
                     },
                     {
-                        "category": "AllLogs",
+                        "category": "Security",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "ServiceHealth",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "Alert",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "Recommendation",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    },
+                    {
+                        "category": "Policy",
                         "enabled": true,
                         "retentionPolicy": {
                             "enabled": false,
