@@ -163,7 +163,6 @@
                             "type": "Microsoft.Insights/diagnosticSettings",
                             "apiVersion": "2021-05-01-preview",
                             "name": "SubscriptionDiagnostics",
-                            "scope": "[subscription().id]",
                             "properties": {
                                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                                 "logs": [
@@ -191,7 +190,7 @@
         {
             "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
             "apiVersion": "2021-05-01-preview",
-            "name": "[concat(parameters('workspaceName'), '/Microsoft.Insights/LAWorkspaceDiagnostics')]",
+            "name": "LAWorkspaceDiagnosticSettings",
             "dependsOn": [
                 "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
             ],
