@@ -134,7 +134,9 @@
             "name": "workspaceCreation",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
-            "dependsOn": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/resourceGroups',parameters('rgName'))]"
+            ],
             "resourceGroup": "[parameters('rgName')]",
             "properties": {
                 "mode": "Incremental",
@@ -346,7 +348,7 @@
                     ]
                 }
             }
-        }
+        },
     ],
     "outputs": {
         "workspaceName": {
