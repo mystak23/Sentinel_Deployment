@@ -133,7 +133,7 @@
             "dependsOn": [
                 "default"
             ],
-            "apiVersion":"2022-12-01-preview",
+            "apiVersion": "2022-12-01-preview",
             "properties": {
                 "severity": "Informational",
                 "status": "Closed",
@@ -142,22 +142,50 @@
             }
         },
         {
-            "type": "Microsoft.Insights/diagnosticSettings",
-            "apiVersion": "2021-05-01-preview",
-            "name": "SubscriptionDiagnostics",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "DeploySubscriptionDiagnostics",
             "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                "logs": [
-                    { "category": "Administrative", "enabled": true },
-                    { "category": "Security", "enabled": true },
-                    { "category": "ServiceHealth", "enabled": true },
-                    { "category": "Alert", "enabled": true },
-                    { "category": "Recommendation", "enabled": true },
-                    { "category": "Policy", "enabled": true },
-                    { "category": "Autoscale", "enabled": true },
-                    { "category": "ResourceHealth", "enabled": true }
-                ],
-                "metrics": []
+                "mode": "Incremental",
+                "expressionEvaluationOptions": {
+                    "scope": "inner"
+                },
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "workspaceName": {
+                            "type": "string"
+                        }
+                    },
+                    "resources": [
+                        {
+                            "type": "Microsoft.Insights/diagnosticSettings",
+                            "apiVersion": "2021-05-01-preview",
+                            "name": "SubscriptionDiagnostics",
+                            "scope": "[subscription().id]",
+                            "properties": {
+                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                                "logs": [
+                                    { "category": "Administrative", "enabled": true },
+                                    { "category": "Security", "enabled": true },
+                                    { "category": "ServiceHealth", "enabled": true },
+                                    { "category": "Alert", "enabled": true },
+                                    { "category": "Recommendation", "enabled": true },
+                                    { "category": "Policy", "enabled": true },
+                                    { "category": "Autoscale", "enabled": true },
+                                    { "category": "ResourceHealth", "enabled": true }
+                                ],
+                                "metrics": []
+                            }
+                        }
+                    ]
+                },
+                "parameters": {
+                    "workspaceName": {
+                        "value": "[parameters('workspaceName')]"
+                    }
+                }
             }
         },
         {
