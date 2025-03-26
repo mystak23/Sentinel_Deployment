@@ -47,7 +47,7 @@
       "properties": {
         "azPowerShellVersion": "10.4",
         "scriptContent": "param([string[]]$providers)\nforeach ($provider in $providers) {\n  Register-AzResourceProvider -ProviderNamespace $provider\n  Write-Output \"Registered $provider\"\n}",
-        "arguments": "[concat('-providers ', join(' ', createArray('Microsoft.AAD','Microsoft.App','Microsoft.AVS','Microsoft.Addons','Microsoft.Web','Microsoft.Storage','Microsoft.HybridCompute')))]",
+        "arguments": "[format('-providers {0}', join(' ', createArray('Microsoft.AAD','Microsoft.App','Microsoft.AVS','Microsoft.Addons','Microsoft.Web','Microsoft.Storage','Microsoft.HybridCompute')))]",
         "timeout": "PT15M",
         "cleanupPreference": "OnSuccess",
         "retentionInterval": "P1D",
