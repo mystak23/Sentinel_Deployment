@@ -295,7 +295,7 @@
                             "name": "[format('{0}/Microsoft.Insights/LAWorkspaceDiagnostics', parameters('workspaceName'))]",
                             "dependsOn": [],
                             "properties": {
-                                "workspaceId": "[resourceId(parameters('rgName'), 'Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                                 "logs": [
                                     {
                                         "categoryGroup": "audit",
@@ -315,7 +315,7 @@
                             "name": "SubscriptionDiagnostics",
                             "scope": "[subscription().id]",
                             "properties": {
-                                "workspaceId": "[resourceId(parameters('rgName'), 'Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                                 "logs": [
                                     { "category": "Administrative", "enabled": true },
                                     { "category": "Security", "enabled": true },
