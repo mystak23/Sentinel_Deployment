@@ -82,11 +82,9 @@
             "dependsOn": [],
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                "logs": [
-                    {
-                        "category": "AllLogs",
-                        "enabled": true
-                    }
+                "logCategoryGroups": [
+                    "audit",
+                    "allLogs"
                 ],
                 "metrics": []
             }
