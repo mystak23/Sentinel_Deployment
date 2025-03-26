@@ -50,14 +50,14 @@
             "apiVersion": "2015-11-01-preview",
             "name": "[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
             "location": "[resourceGroup().location]",
-            "properties":{
-                "workspaceResourceId":"[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"    
+            "properties": {
+                "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
             },
-            "plan":{
-                "name":"[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
-                "publisher":"Microsoft",
-                "product":"OMSGallery/BehaviorAnalyticsInsights",
-                "promotionCode":""
+            "plan": {
+                "name": "[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
+                "publisher": "Microsoft",
+                "product": "OMSGallery/BehaviorAnalyticsInsights",
+                "promotionCode": ""
             }
         },
         {
@@ -79,7 +79,9 @@
             "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
             "apiVersion": "2021-05-01-preview",
             "name": "[concat(parameters('workspaceName'), '/Microsoft.Insights/LAWorkspaceDiagnostics')]",
-            "dependsOn": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
+            ],
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "logCategoryGroups": [
@@ -115,14 +117,38 @@
                             "properties": {
                                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                                 "logs": [
-                                    { "category": "Administrative", "enabled": true },
-                                    { "category": "Security", "enabled": true },
-                                    { "category": "ServiceHealth", "enabled": true },
-                                    { "category": "Alert", "enabled": true },
-                                    { "category": "Recommendation", "enabled": true },
-                                    { "category": "Policy", "enabled": true },
-                                    { "category": "Autoscale", "enabled": true },
-                                    { "category": "ResourceHealth", "enabled": true }
+                                    {
+                                        "category": "Administrative",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Security",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "ServiceHealth",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Alert",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Recommendation",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Policy",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "Autoscale",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "category": "ResourceHealth",
+                                        "enabled": true
+                                    }
                                 ],
                                 "metrics": []
                             }
