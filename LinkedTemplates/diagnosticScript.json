@@ -2,12 +2,30 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "subscriptionId": { "type": "string" },
-    "identityResourceGroup": { "type": "string" },
-    "identityName": { "type": "string" },
-    "location": { "type": "string" },
-    "rgName": { "type": "string" },
-    "workspaceName": { "type": "string" }
+    "subscriptionId": {
+      "type": "string",
+      "defaultValue": "00000000-0000-0000-0000-000000000000"
+    },
+    "identityResourceGroup": {
+      "type": "string",
+      "defaultValue": "my-identity-rg"
+    },
+    "identityName": {
+      "type": "string",
+      "defaultValue": "my-identity-name"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "westeurope"
+    },
+    "rgName": {
+      "type": "string",
+      "defaultValue": "my-resource-group"
+    },
+    "workspaceName": {
+      "type": "string",
+      "defaultValue": "my-workspace"
+    }
   },
   "resources": [
     {
