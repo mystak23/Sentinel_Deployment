@@ -69,14 +69,6 @@
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "logs": [
                     {
-                        "category": "Automation",
-                        "enabled": true
-                    },
-                    {
-                        "category": "DataConnectors",
-                        "enabled": true
-                    },
-                    {
                         "category": "Analytics",
                         "enabled": true
                     }
@@ -91,10 +83,6 @@
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "logs": [
-                    {
-                        "category": "AuditLogs",
-                        "enabled": true
-                    },
                     {
                         "category": "AllLogs",
                         "enabled": true
