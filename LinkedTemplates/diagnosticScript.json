@@ -59,8 +59,5 @@
         "scriptContent": "az config set extension.use_dynamic_install=yes_without_prompt\n\nWS_ID=$(az monitor log-analytics workspace show --workspace-name $WORKSPACE_NAME --resource-group $RG_NAME --query id -o tsv)\n\naz monitor diagnostic-settings create --name LAWorkspaceDiagnostics --resource $WS_ID --workspace $WS_ID --logs '[{\"categoryGroup\": \"audit\", \"enabled\": true}, {\"categoryGroup\": \"allLogs\", \"enabled\": true}]' --metrics '[]'\n\naz monitor diagnostic-settings subscription create --name SubscriptionDiagnostics --workspace $WS_ID --logs '[{\"category\": \"Administrative\", \"enabled\": true}, {\"category\": \"Security\", \"enabled\": true}, {\"category\": \"ServiceHealth\", \"enabled\": true}, {\"category\": \"Alert\", \"enabled\": true}, {\"category\": \"Recommendation\", \"enabled\": true}, {\"category\": \"Policy\", \"enabled\": true}, {\"category\": \"Autoscale\", \"enabled\": true}, {\"category\": \"ResourceHealth\", \"enabled\": true}]"
       }
     }
-  ],
-  "userAssignedIdentities": {
-    "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', parameters('identityResourceGroup'), '/providers/Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('identityName'))]": {}
-  }
+  ]
 }
