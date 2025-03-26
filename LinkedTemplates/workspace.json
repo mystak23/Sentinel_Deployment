@@ -99,7 +99,6 @@
         {
             "type": "Microsoft.SecurityInsights/onboardingStates",
             "name": "default",
-            "scope": "[concat('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]",
             "apiVersion": "2022-12-01-preview",
             "properties": {
             },
@@ -134,7 +133,6 @@
             "dependsOn": [
                 "default"
             ],
-            "scope": "[concat('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]",
             "apiVersion":"2022-12-01-preview",
             "properties": {
                 "severity": "Informational",
@@ -144,17 +142,20 @@
             }
         },
         {
-            "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
+            "type": "Microsoft.Insights/diagnosticSettings",
             "apiVersion": "2021-05-01-preview",
-            "name": "[concat(parameters('workspaceName'), '/Microsoft.Insights/LAWorkspaceDiagnostics')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]"
-            ],
+            "name": "SubscriptionDiagnostics",
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-                "logCategoryGroups": [
-                    "audit",
-                    "allLogs"
+                "logs": [
+                    { "category": "Administrative", "enabled": true },
+                    { "category": "Security", "enabled": true },
+                    { "category": "ServiceHealth", "enabled": true },
+                    { "category": "Alert", "enabled": true },
+                    { "category": "Recommendation", "enabled": true },
+                    { "category": "Policy", "enabled": true },
+                    { "category": "Autoscale", "enabled": true },
+                    { "category": "ResourceHealth", "enabled": true }
                 ],
                 "metrics": []
             }
