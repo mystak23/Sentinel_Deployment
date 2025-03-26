@@ -126,18 +126,6 @@
                 "description": "The location of resources"
             },
             "defaultValue": "https://raw.githubusercontent.com/garybushey/AllInOneGov/main"
-        },
-        "identityResourceGroup": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the resource group containing the user-assigned managed identity."
-            }
-        },
-        "identityName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the user-assigned managed identity used for deployment scripts."
-            }
         }
     },
     "variables": {},
@@ -184,42 +172,6 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2020-06-01",
-            "name": "runDiagnosticsScriptDeployment",
-            "resourceGroup": "[parameters('rgName')]",
-            "dependsOn": [
-                "workspaceCreation"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://mystak23.github.io/Sentinel_Deployment/LinkedTemplates/diagnosticSettings.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "rgName": {
-                        "value": "[parameters('rgName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspaceName": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "subscriptionId": {
-                        "value": "[subscription().subscriptionId]"
-                    },
-                    "identityResourceGroup": {
-                        "value": "[parameters('identityResourceGroup')]"
-                    },
-                    "identityName": {
-                        "value": "[parameters('identityName')]"
                     }
                 }
             }
@@ -320,6 +272,63 @@
                     "location": {
                         "value": "[parameters('location')]"
                     }
+                }
+            }
+        },
+        {
+            "name": "diagnosticSettings",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
+            "resourceGroup": "[parameters('rgName')]",
+            "dependsOn": [
+                "workspaceCreation"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.OperationalInsights/workspaces/providers/diagnosticSettings",
+                            "apiVersion": "2021-05-01-preview",
+                            "name": "[format('{0}/Microsoft.Insights/LAWorkspaceDiagnostics', parameters('workspaceName'))]",
+                            "dependsOn": [],
+                            "properties": {
+                                "workspaceId": "[resourceId(parameters('rgName'), 'Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                                "logs": [
+                                    {
+                                        "categoryGroup": "audit",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "categoryGroup": "allLogs",
+                                        "enabled": true
+                                    }
+                                ],
+                                "metrics": []
+                            }
+                        },
+                        {
+                            "type": "Microsoft.Insights/diagnosticSettings",
+                            "apiVersion": "2021-05-01-preview",
+                            "name": "SubscriptionDiagnostics",
+                            "scope": "[subscription().id]",
+                            "properties": {
+                                "workspaceId": "[resourceId(parameters('rgName'), 'Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                                "logs": [
+                                    { "category": "Administrative", "enabled": true },
+                                    { "category": "Security", "enabled": true },
+                                    { "category": "ServiceHealth", "enabled": true },
+                                    { "category": "Alert", "enabled": true },
+                                    { "category": "Recommendation", "enabled": true },
+                                    { "category": "Policy", "enabled": true },
+                                    { "category": "Autoscale", "enabled": true },
+                                    { "category": "ResourceHealth", "enabled": true }
+                                ]
+                            }
+                        }
+                    ]
                 }
             }
         }
