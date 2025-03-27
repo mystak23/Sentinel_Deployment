@@ -47,7 +47,10 @@ param (
     [bool]$EnableDiagnostics = $true,
 
     [Parameter(Mandatory=$false)]
-    [string[]]$SeverityLevels = @()
+    [string[]]$SeverityLevels = @(),
+
+    [Parameter(Mandatory=$true)]
+    [string]$SubscriptionId
 )
 
 # -----------------------------------------
@@ -109,7 +112,7 @@ $archiveTables = @(
     "AuditLogs",
     "AADNonInteractiveUserSignInLogs",
     "AADRiskyUsers",
-    "AADUserRiskEvents"
+    "AADUserRiskEvents",
     "AADServicePrincipalSignInLogs",
     "AADManagedIdentitySignInLogs",
     "AADProvisioningLogs",
@@ -190,7 +193,7 @@ try {
         --workspace-name $WorkspaceName `
         --resource-group $RgName `
         --query id `
-        --output tsv *> $null
+        --output tsv
 
     Write-Host "[START] ⚙️ Creating diagnostic settings for Log Analytics Workspace..." -ForegroundColor Blue
     az monitor diagnostic-settings create `
@@ -199,6 +202,8 @@ try {
         --workspace $workspaceId `
         --logs '[{"categoryGroup":"audit","enabled":true}, {"categoryGroup":"allLogs","enabled":true}]' `
         --metrics '[]' *> $null
+    Write-Host "[SUCCESS] ✅ Successfully created diagnostic settings for Log Analytics Workspace" -ForegroundColor Green
+
 
     Write-Host "[START] 📊 Creating diagnostic settings for the Subscription..." -ForegroundColor Blue
     az monitor diagnostic-settings subscription create `
@@ -206,7 +211,7 @@ try {
         --workspace $workspaceId `
         --logs '[{"category":"Administrative","enabled":true}, {"category":"Security","enabled":true}, {"category":"ServiceHealth","enabled":true}, {"category":"Alert","enabled":true}, {"category":"Recommendation","enabled":true}, {"category":"Policy","enabled":true}, {"category":"Autoscale","enabled":true}, {"category":"ResourceHealth","enabled":true}]' *> $null
 
-    Write-Host "[SUCCESS] ✅ Successfully created diagnostic settings for Log Analytics Workspace and Subscription." -ForegroundColor Green
+    Write-Host "[SUCCESS] ✅ Successfully created diagnostic settings for Subscription." -ForegroundColor Green
 } catch {
     Write-Host "[ERROR] ❌ Failed to create diagnostic settings: $_" -ForegroundColor Red
 }
