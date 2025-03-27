@@ -1,4 +1,4 @@
-# Author
+# 📂 Author
 
 Matěj Hrabálek -- https://www.linkedin.com/in/matejhrabalek/
 
@@ -6,18 +6,45 @@ Matěj Hrabálek -- https://www.linkedin.com/in/matejhrabalek/
 
 This repository contains scripts and configurations for automating the deployment and configuration of **Microsoft Sentinel**.
 
-This is the modified https://github.com/javiersoriano/sentinel-all-in-one repository.
+This is the modified https://github.com/javiersoriano/sentinel-all-in-one repository with additional scripts.
 
 ## 📂 Repository Structure
 
-- **`Scripts/`** – Collection of scripts for deploying Microsoft Sentinel
-- **`LinkedTemplates/`** – ARM templates for deploying Sentinel and related resources.
+- **`LinkedTemplates/`** – Collection of sub-templates for deployment, including settings, workspace deployment and content hub solutions. **Not all content is used in the `./SentinelDeploy.ps1` script for now.**
 - **`Media/`** – Additional media files
 
 - **`README.md`** – Documentation and usage guide for this repository.
 
-- **`azuredeploy.json`** – Main deployment template.
-- **`createUiDefinition.json`** – Template for creating Azure GUI in order to deploy azuredeploy.json.
+- **`azuredeploy.json`** – ARM deployment template.
+
+- **`./SentinelDeploy.ps1`** – Main deploying script.
+
+# 📌 What the script is doing
+
+The `SentinelDeploy.ps1` script performs a full deployment of Microsoft Sentinel using an ARM template. 
+
+These parameters are general and might be modified in the script:
+   - **Location:** North Europe
+   - **Tier:** Pay-as-you-go
+
+It automates the following steps:
+
+1. 🚀 **Deploys Microsoft Sentinel Workspace**  
+   - Creates a new Resource Group using `azuredeploy.json`
+   - Deploys Log Analytics workspace using `azuredeploy.json`
+   - Changes default Log Analytics workspace retention to 90 days using `azuredeploy.json`
+   - Enables Microsoft Sentinel UEBA using `azuredeploy.json`
+   - Enables Microsoft Sentinel auditing using `azuredeploy.json`
+   - Installs the author's favorite Content Hub Solutions using `azuredeploy.json`. The Content Hub Solutions can be modified in the `LinkedTemplates/solutions.json` template.
+
+2. 🛠️ **Registers Required Resource Providers**  
+   - Ensures all necessary Azure resource providers are registered.
+
+3. 📊 **Configures Diagnostic Settings**  
+   - Enables diagnostic logging for both the Log Analytics workspace and the subscription.
+
+4. 🗃️ **Sets Retention Policies**  
+   - Applies default archive and interactive retention for selected Log Analytics tables. The default values are **90** days for interactive retention and **730** days for archive retention. The tables **SecurityIncident** and **SecurityAlert** have the interactive retention for two years. It can be modified.
 
 ## 🚀 Deployment Guide
 
@@ -25,12 +52,19 @@ This is the modified https://github.com/javiersoriano/sentinel-all-in-one reposi
 
 Ensure you have the following:
 - **Owner** permissions on the target Azure subscription
-- **PowerShell 7+** or **Python 3.x** (depending on the scripts used)
+- **Security Administrator or Global Administrator** permissions in tenant
+- **PowerShell 7+** installed
+- **PowerShell 7+** installed
 
 ### 2️⃣ Deployment Steps
 
-#### **Option 1: Deploy Sentinel using ARM Templates**
+#### 1️⃣ Prerequisites
 
-Click on the following button
+Run the script
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmystak23%2FSentinel_Deployment%2Fmain%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fmystak23%2FSentinel_Deployment%2Fmain%2FcreateUiDefinition.json)
+`./SentinelDeploy.ps1`
+
+#### 2️⃣ Enter parameters
+
+RgName: `<your_RG_name>`
+WorkspaceName: `<your_LA_name>`
