@@ -224,7 +224,7 @@ try {
             --name $tableName `
             --retention-time $archiveRetentionTableTime `
             --total-retention-time $totalRetention *> $null
-        Write-Host "[SUCCESS] ✅ Successfully set archive retention to $archiveRetentionTableTime for $tableName." -ForegroundColor Green
+        Write-Host "[SUCCESS] ✅ Successfully set archive retention to $totalRetention days for $tableName." -ForegroundColor Green
     }
 
     # Set interactive retention to 2 years for SecurityAlert and SecurityIncident
@@ -236,7 +236,7 @@ try {
             --name $tableName `
             --retention-time $interactiveRetentionTableTime `
             --total-retention-time $totalRetention *> $null
-        Write-Host "[SUCCESS] ✅ Successfully set interactive retention to $interactiveRetentionTableTime for $tableName." -ForegroundColor Green
+        Write-Host "[SUCCESS] ✅ Successfully set interactive retention to $interactiveRetentionTableTime days for $tableName." -ForegroundColor Green
     }
 
     Write-Host "[SUCCESS] ✅ Successfully set retention for ALL tables." -ForegroundColor Green

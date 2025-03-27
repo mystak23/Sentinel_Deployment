@@ -19,7 +19,7 @@ This is the modified https://github.com/javiersoriano/sentinel-all-in-one reposi
 
 - **`./SentinelDeploy.ps1`** – Main deploying script.
 
-# 📌 What the script is doing
+## 📌 What the script is doing
 
 The `SentinelDeploy.ps1` script performs a full deployment of Microsoft Sentinel using an ARM template. 
 
@@ -46,25 +46,32 @@ It automates the following steps:
 4. 🗃️ **Sets Retention Policies**  
    - Applies default archive and interactive retention for selected Log Analytics tables. The default values are **90** days for interactive retention and **730** days for archive retention. The tables **SecurityIncident** and **SecurityAlert** have the interactive retention for two years. It can be modified.
 
-## 🚀 Deployment Guide
+## 📌 What the script is NOT doing
 
-### 1️⃣ Prerequisites
+For now, this must be deployed using Azure Portal:
+
+1. 🛠️ **Integrate Workspace in the Security Portal**
+2. 🚀 **Enable UEFA for specific tablese**  
+3. 📊 **Enable Data connectors** except Azure Activity table, which is auto-deployed after creating Diagnostic Settings in the subscription
+
+# 🚀 Deployment Guide
+
+## 1️⃣ Prerequisites
 
 Ensure you have the following:
 - **Owner** permissions on the target Azure subscription
 - **Security Administrator or Global Administrator** permissions in tenant
 - **PowerShell 7+** installed
-- **PowerShell 7+** installed
+git 
+## 2️⃣ Deployment Steps
 
-### 2️⃣ Deployment Steps
-
-#### 1️⃣ Prerequisites
+### 1️⃣ Run the script
 
 Run the script
 
 `./SentinelDeploy.ps1`
 
-#### 2️⃣ Enter parameters
+### 2️⃣ Enter parameters
 
 RgName: `<your_RG_name>`
 WorkspaceName: `<your_LA_name>`
