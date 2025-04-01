@@ -74,5 +74,6 @@ Run the script
 
 ### 2️⃣ Enter parameters
 
-RgName: `<your_RG_name>`
-WorkspaceName: `<your_LA_name>`
+- RgName: `<your_RG_name>`
+- WorkspaceName: `<your_LA_name>`
+- SubscripionId: `<your_subscription_ID>`
