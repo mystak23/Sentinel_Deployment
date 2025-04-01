@@ -1,199 +1,452 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "workspaceName": {
-            "type": "string"
-        },
-        "enableSolutions1P": {
-            "type": "array",
-            "metadata": {
-                "description": "The list of Content Hub solutions to deploy."
-            }
-        },
-        "location": {
-            "type": "string"
-        }
+  "Packages": [
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoftdefender",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoftdefender-sl-abcdefg12345",
+      "displayName": "Microsoft Defender for Cloud",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
     },
-    "variables": {},
-    "resources": [
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftEntraID')]",
-            "name": "MicrosoftEntraID",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20Entra%20ID/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'Microsoft365')]",
-            "name": "Microsoft365",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20365/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workbook1-name": {
-                        "value": "SharePoint & OneDrive"
-                    },
-                    "workbook2-name": {
-                        "value": "Office 365"
-                    },
-                    "workbook3-name": {
-                        "value": "Exchange Online"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'Teams')]",
-            "name": "Teams",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Teams/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderforEndpoint')]",
-            "name": "MicrosoftDefenderForEndpoint",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/MicrosoftDefenderForEndpoint/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'MicrosoftDefenderforCloud')]",
-            "name": "MicrosoftDefenderForCloud",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Microsoft%20Defender%20for%20Cloud/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'AzureActivity')]",
-            "name": "AzureActivity",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Azure%20Activity/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "condition": "[contains(parameters('enableSolutions1P'), 'ThreatIntelligence')]",
-            "name": "ThreatIntelligence",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2021-04-01",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/refs/heads/master/Solutions/Threat%20Intelligence/Package/mainTemplate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "workspace": {
-                        "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    },
-                    "workspace-location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        }
-    ],
-    "outputs": {}
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-threatintelligence",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-threatintelligence-sl-hijklmnop67890",
+      "displayName": "Threat Intelligence",
+      "version": "3.1.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-sentinelsoar",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-sentinelsoar-sl-qrs98765",
+      "displayName": "Sentinel SOAR Essentials",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azureactivity",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azureactivit-sl-pbvvxnviohr3o",
+      "displayName": "Azure Activity",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoftdefenderforcloud",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoftdef-sl-zwq4lkliu76fq",
+      "displayName": "Microsoft Defender for Cloud",
+      "version": "3.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-threatintelligence-taxii",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-threatintell-sl-lffkto5jp7mxa",
+      "displayName": "Threat Intelligence",
+      "version": "3.0.7",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-sentinelsoaressentials",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-sentinelsoar-sl-m4mryveblhewo",
+      "displayName": "Sentinel SOAR Essentials",
+      "version": "3.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "microsoftsentinelcommunity.azure-sentinel-solution-sochandbook",
+      "contentKind": "Solution",
+      "contentProductId": "microsoftsentinelcommunity.azure-sentinel-solution-sl-dy6nnc23hav5m",
+      "displayName": "SOC Handbook",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-abuseipdb",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-abuseipdb-sl-ncd2wb4qnyece",
+      "displayName": "AbuseIPDB",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-uebaessentials",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-uebaessentia-sl-eotfmni3fyf7y",
+      "displayName": "UEBA Essentials",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "WorkspaceUsage",
+      "contentKind": "Standalone",
+      "contentProductId": "WorkspaceUsage-sa-uudwpq63cbs7i",
+      "displayName": "Workspace Usage Report",
+      "version": "1.6.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "AnalyticsHealthAudit",
+      "contentKind": "Standalone",
+      "contentProductId": "AnalyticsHealthAudit-sa-3oc5ns52ok36e",
+      "displayName": "Analytics Health & Audit",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-virustotal",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-virustotal-sl-3eusldwvoibcs",
+      "displayName": "VirusTotal",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azureactivedirectory",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azureactived-sl-ihqtuu7i6ie4y",
+      "displayName": "Microsoft Entra ID",
+      "version": "3.3.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azuresql",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azuresql-sl-bxk2wsrmlngmj",
+      "displayName": "Azure SQL",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-awscloudtrail",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-awscloudtrail-sl-mn3akqejf67zo",
+      "displayName": "AWS CloudTrail",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-paloaltonetworks",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-paloaltonetworks-sl-6erj3fgsdlvke",
+      "displayName": "Palo Alto Networks",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-vmware",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-vmware-sl-t2ywzflpjepea",
+      "displayName": "VMware",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azureactivedirectoryip",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azureactived-sl-rqz3yyxjaiytq",
+      "displayName": "Microsoft Entra ID Protection",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "AzureAuditActivityAndSigninWorkbook",
+      "contentKind": "Standalone",
+      "contentProductId": "AzureAuditActivityAndSigninWorkbook-sa-ybu2ldcdryfgk",
+      "displayName": "Azure AD Audit, Activity and Sign-in logs",
+      "version": "1.3.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-apachelog4jvulnerability",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-apachelog4jv-sl-3ywsqxmgsqpnk",
+      "displayName": "Log4j Vulnerability Detection",
+      "version": "3.0.6",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-securitythreatessentialsol",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-securitythre-sl-6px35vua7g4zi",
+      "displayName": "Security Threat Essentials",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-networksession",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-networksessi-sl-eruhfka2kairo",
+      "displayName": "Network Session Essentials",
+      "version": "3.0.5",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoft365defender",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoft365-sl-wwynkwuacxfmq",
+      "displayName": "Microsoft Defender XDR",
+      "version": "3.0.10",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-securityevents",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-securityeven-sl-exvlkfvbts35w",
+      "displayName": "Windows Security Events",
+      "version": "3.0.9",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-commoneventformat",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-commoneventf-sl-rxoxeocmpikv2",
+      "displayName": "Common Event Format",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "SentinelHealth",
+      "contentKind": "Standalone",
+      "contentProductId": "SentinelHealth-sa-eihu5fzxrgo22",
+      "displayName": "Sentinel Health",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "MicrosoftSentinelCostEUR",
+      "contentKind": "Standalone",
+      "contentProductId": "MicrosoftSentinelCostEUR-sa-qsipmfcv74lik",
+      "displayName": "Microsoft Sentinel Cost (EUR)",
+      "version": "1.3.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "DataCollectionHealthMonitoring",
+      "contentKind": "Standalone",
+      "contentProductId": "DataCollectionHealthMonitoring-sa-3ebb2lfz6p26m",
+      "displayName": "Data collection health monitoring",
+      "version": "1.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "DataCollectionRuleToolkit",
+      "contentKind": "Standalone",
+      "contentProductId": "DataCollectionRuleToolkit-sa-2apuh6ifavoqo",
+      "displayName": "Data Collection Rule Toolkit",
+      "version": "1.2.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "WorkspaceAuditingWorkbook",
+      "contentKind": "Standalone",
+      "contentProductId": "WorkspaceAuditingWorkbook-sa-7v3mpgfgctvz6",
+      "displayName": "Workspace audit",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "SyslogOverview",
+      "contentKind": "Standalone",
+      "contentProductId": "SyslogOverview-sa-bcmhrhasb3xwc",
+      "displayName": "Syslog Overview",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-syslog",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-syslog-sl-2qhp35ywfuyrm",
+      "displayName": "Syslog",
+      "version": "3.0.7",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azurekeyvault",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azurekeyvaul-sl-3m323kndkg22c",
+      "displayName": "Azure Key Vault",
+      "version": "3.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-dns-domain",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-dns-domain-sl-34mvobcsw5gde",
+      "displayName": "DNS Essentials",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoftdefenderforo365",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoftdef-sl-gvmsvmn4kqgq6",
+      "displayName": "Microsoft Defender for Office 365",
+      "version": "3.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-mdefenderforidentity",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-mdefenderfor-sl-y4muootq5clgi",
+      "displayName": "Microsoft Defender for Identity",
+      "version": "2.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoftdefendercloudapps",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoftdef-sl-lbvjxdfx7e4hc",
+      "displayName": "Microsoft Defender for Cloud Apps",
+      "version": "2.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-microsoftdefenderendpoint",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-microsoftdef-sl-gdv2bozi4bity",
+      "displayName": "Microsoft Defender for Endpoint",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-unifiedmicrosoftsocforot",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-unifiedmicro-sl-hdpwcb5b2u3qq",
+      "displayName": "Microsoft Defender for IoT",
+      "version": "3.0.2",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-insiderriskmanagement",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-insiderriskm-sl-l2reapc5e2jvq",
+      "displayName": "Microsoft Purview Insider Risk Management",
+      "version": "3.0.5",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-zerotrust",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-zerotrust-sl-fpokgahrue5qa",
+      "displayName": "Zero Trust (TIC 3.0)",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-mip",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-mip-sl-musvyw465ik4w",
+      "displayName": "Microsoft Purview Information Protection",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azurepurview",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azurepurview-sl-y2d2wwdz5ewv2",
+      "displayName": "Microsoft Purview",
+      "version": "2.0.7",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-logicapps",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-logicapps-sl-n3dubysksmgmc",
+      "displayName": "Azure Logic Apps",
+      "version": "2.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-endpointthreat",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-endpointthre-sl-gcodoc6pmz3ru",
+      "displayName": "Endpoint Threat Protection Essentials",
+      "version": "3.0.4",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-office365",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-office365-sl-ftxjjkjwhn3a6",
+      "displayName": "Microsoft 365",
+      "version": "3.0.5",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "sentinel4teams.sentinelforteams",
+      "contentKind": "Solution",
+      "contentProductId": "sentinel4teams.sentinelforteams-sl-zgg6abhqrvqrw",
+      "displayName": "Teams",
+      "version": "3.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-eventhub",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-eventhub-sl-ltnqwx5xh6uqo",
+      "displayName": "Azure Event Hubs",
+      "version": "2.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azureddosprotection",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azureddospro-sl-sl76jtunour54",
+      "displayName": "Azure DDoS Protection",
+      "version": "2.0.4",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-azuredevopsauditing",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-azuredevopsa-sl-qnjzhjllo5gaa",
+      "displayName": "Azure DevOps Auditing",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "microsoftsentinelcommunity.azure-sentinel-solution-kqltraining",
+      "contentKind": "Solution",
+      "contentProductId": "microsoftsentinelcommunity.azure-sentinel-solution-sl-vciyn2pswltsg",
+      "displayName": "KQL Training",
+      "version": "3.0.1",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-webshellsthreatprotection",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-webshellsthr-sl-5dbnpxc3x6km4",
+      "displayName": "Web Shells Threat Protection",
+      "version": "3.0.4",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "LogAnalyticsQueryAnalysis",
+      "contentKind": "Standalone",
+      "contentProductId": "LogAnalyticsQueryAnalysis-sa-asa53cxlhptou",
+      "displayName": "Log Analytics Query Analysis",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "Microsoft365SecurityPosture",
+      "contentKind": "Standalone",
+      "contentProductId": "Microsoft365SecurityPosture-sa-5oqx67nqrc222",
+      "displayName": "Microsoft 365 Security Posture",
+      "version": "1.0.0",
+      "contentSchemaVersion": "3.0.0"
+    },
+    {
+      "contentId": "azuresentinel.azure-sentinel-solution-cloudthreatdetection",
+      "contentKind": "Solution",
+      "contentProductId": "azuresentinel.azure-sentinel-solution-cloudthreatd-sl-yrcoydbybmxc2",
+      "displayName": "Cloud Identity Threat Protection Essentials",
+      "version": "3.0.3",
+      "contentSchemaVersion": "3.0.0"
+    }
+  ]
 }
